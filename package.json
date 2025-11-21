@@ -1,0 +1,35 @@
+{
+  "name": "realtime-api",
+  "type": "module",
+  "scripts": {
+    "dev": "bun --watch src/app.ts",
+    "start": "bun src/app.ts",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "ci": "bun format:check && bun lint && bun check-types",
+    "push": "drizzle-kit push",
+    "push:force": "docker compose down -v && docker compose up -d --wait && npm run push"
+  },
+  "dependencies": {
+    "@paralleldrive/cuid2": "^3.0.4",
+    "drizzle-orm": "^0.44.7",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.16.3",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/bun": "latest",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/pg": "^8.15.6",
+    "drizzle-kit": "^0.31.7",
+    "eslint": "^9.39.1",
+    "prettier-plugin-organize-imports": "^4.3.0",
+    "typescript-eslint": "^8.47.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
