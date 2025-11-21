@@ -4,7 +4,7 @@ import { sign, verify } from 'jsonwebtoken'
 import z from 'zod'
 import { addCorsHeaders } from '../cors'
 
-export const ok = (data: unknown) => Response.json(data)
+export const ok = (data: unknown, headers?: Headers) => Response.json(data, { headers })
 
 export const created = (data: unknown) => Response.json(data, { status: 201 })
 

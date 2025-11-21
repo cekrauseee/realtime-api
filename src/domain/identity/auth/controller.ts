@@ -34,7 +34,7 @@ export const signInPost: PublicController = async (req) => {
   const headers = new Headers()
   injectAuthorizationHeader(user.id, headers)
 
-  return noContent(headers)
+  return ok({ session: { user } }, headers)
 }
 
 export const signUpPost: PublicController = async (req) => {
@@ -53,5 +53,5 @@ export const signUpPost: PublicController = async (req) => {
   const headers = new Headers()
   injectAuthorizationHeader(user.id, headers)
 
-  return noContent(headers)
+  return ok({ session: { user } }, headers)
 }
