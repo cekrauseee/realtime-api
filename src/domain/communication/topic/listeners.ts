@@ -1,11 +1,14 @@
 import type { Listener } from '@/domain/infra/ws/utils/types'
-import z from 'zod'
+import { joinTopicDto, leaveTopicDto } from './dtos'
 
-export const joinListener: Listener = async (data, ws) => {
-  const parse = z.object({ topicId: z.cuid2() }).safeParse(data)
-  if (!parse.success) return
-  const payload = parse.data
+export const joinTopicListener: Listener = (data, ws) => {
+  const parse = joinTopicDto.parse(data)
 
   Array.from(ws.subscriptions.values()).forEach((topic) => ws.unsubscribe(topic))
-  ws.subscribe(payload.topicId)
+  ws.subscribe(parse.topicId)
+}
+
+export const leaveTopicListener: Listener = (data, ws) => {
+  const parse = leaveTopicDto.parse(data)
+  ws.unsubscribe(parse.topicId)
 }
