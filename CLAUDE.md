@@ -9,11 +9,13 @@ A realtime WebSocket API built with Bun, featuring user authentication and topic
 ## Development Commands
 
 ### Running the Application
+
 - `bun dev` - Start development server with hot reload
 - `bun start` - Start production server
 - Port: 3001 (configurable via `PORT` env var)
 
 ### Code Quality
+
 - `bun check-types` - Run TypeScript type checking
 - `bun lint` - Run ESLint
 - `bun format` - Format code with Prettier
@@ -21,6 +23,7 @@ A realtime WebSocket API built with Bun, featuring user authentication and topic
 - `bun ci` - Run all checks (formatting, linting, type checking)
 
 ### Database
+
 - `bun push` - Push Drizzle schema to database
 - `bun push:force` - Reset Docker Postgres container and push schema
 - Database runs in Docker: `docker compose up -d`
@@ -32,6 +35,7 @@ A realtime WebSocket API built with Bun, featuring user authentication and topic
 Code is organized by domain under `src/domain/`:
 
 **Infrastructure Layer** (`src/domain/infra/`)
+
 - `http.ts` - Main HTTP request router with authentication middleware
 - `ws.ts` - WebSocket connection handler
 - `db.ts` - Database connection
@@ -40,12 +44,14 @@ Code is organized by domain under `src/domain/`:
 - `ws/state.ts` - In-memory WebSocket client management
 
 **Identity Domain** (`src/domain/identity/`)
+
 - `auth/` - Authentication (sign-in, sign-up, session management)
   - JWT-based sessions stored in HTTP-only cookies
   - Session token cookie: `session_token`
 - `user/` - User model and repository
 
 **Communication Domain** (`src/domain/communication/`)
+
 - `topic/` - Topic-based messaging with pub/sub pattern
   - Topics are per-user namespaced resources
   - WebSocket clients subscribe to topics using `topic:join` event
@@ -54,6 +60,7 @@ Code is organized by domain under `src/domain/`:
 ### Domain Module Pattern
 
 Each domain feature follows this structure:
+
 - `model.ts` - Drizzle ORM schema definition
 - `repo.ts` - Database queries
 - `controller.ts` - HTTP request handlers
@@ -99,6 +106,7 @@ Similar pattern for WebSocket events:
 ## Environment Configuration
 
 Required environment variables (see `.env.example`):
+
 - `PORT` - Server port (default: 3001)
 - `WEB_URL` - Frontend URL for CORS
 - `DATABASE_URL` - PostgreSQL connection string

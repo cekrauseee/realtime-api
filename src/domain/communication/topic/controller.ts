@@ -27,7 +27,8 @@ export const topicsPost: ProtectedController = async (req, session) => {
   const topic = await createTopic({
     userId: session.user.id,
     name: payload.name,
-    normalizedName: normalizeResourceName(payload.name)
+    normalizedName: normalizeResourceName(payload.name),
+    visibility: 'private'
   })
 
   const augmented = await augmentTopic(topic)
